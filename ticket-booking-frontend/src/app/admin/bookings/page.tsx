@@ -65,7 +65,7 @@ const columns = [
   }),
   columnHelper.accessor('amount', {
     header: () => <div className="text-right">Amount</div>,
-    cell: info => <div className="text-right">${(info.getValue() || 0).toLocaleString()}</div>,
+    cell: info => <div className="text-right font-medium">{new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND', maximumFractionDigits: 0 }).format(info.getValue() || 0)}</div>,
   }),
 ];
 

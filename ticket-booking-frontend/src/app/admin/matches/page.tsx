@@ -77,7 +77,7 @@ const ZONE_CONFIG = [
     cardBorder: "border-orange-200 hover:border-orange-400 focus-within:border-orange-500 focus-within:ring-4 focus-within:ring-orange-500/20",
     cardBg: "hover:bg-orange-50/50",
     iconBg: "bg-orange-100 text-orange-600",
-    selectedBorder: "border-emerald-500 bg-emerald-50 ring-4 ring-emerald-500/20",
+    selectedBorder: "border-orange-500 bg-orange-50 ring-4 ring-orange-500/20",
     selectedText: "text-orange-700",
     previewText: "text-orange-600",
   },

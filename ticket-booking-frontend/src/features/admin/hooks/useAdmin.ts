@@ -137,35 +137,75 @@ export const useAdminMatches = () => {
 
 export const useAdminQueue = (eventId: string | null) => {
   const [queueStats, setQueueStats] = useState<QueueData | null>(null);
+  const [autoConfig, setAutoConfig] = useState<{ enabled: boolean; maxUsers: number } | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const fetchQueue = useCallback(async () => {
+  const fetchStats = useCallback(async () => {
     if (!eventId) return;
     try {
-      setLoading(true);
-      const data = await adminApi.getQueueStats(eventId);
-      setQueueStats(data);
+      const statsData = await adminApi.getQueueStats(eventId);
+      setQueueStats(statsData);
       setError(null);
     } catch (err: any) {
       setError(err.message || "Failed to load queue stats");
+    }
+  }, [eventId]);
+
+  const refetch = useCallback(async () => {
+    if (!eventId) return;
+    try {
+      setLoading(true);
+      const [statsData, configData] = await Promise.all([
+        adminApi.getQueueStats(eventId),
+        adminApi.getAutoQueueConfig(eventId)
+      ]);
+      setQueueStats(statsData);
+      setAutoConfig(configData);
+      setError(null);
+    } catch (err: any) {
+      setError(err.message || "Failed to load queue data");
     } finally {
       setLoading(false);
     }
   }, [eventId]);
 
   useEffect(() => {
-    fetchQueue();
-  }, [fetchQueue]);
+    if (!eventId) {
+      setQueueStats(null);
+      setAutoConfig(null);
+      return;
+    }
+
+    refetch();
+
+    // Realtime polling: refresh stats only every 3 seconds to avoid resetting input fields
+    const interval = setInterval(() => {
+      fetchStats();
+    }, 3000);
+    return () => clearInterval(interval);
+  }, [eventId, refetch, fetchStats]);
 
   const allowUsers = async (count: number) => {
     if (!eventId) return;
     try {
       await adminApi.allowQueueUsers(eventId, count);
       toast.success(`${count} users allowed into the queue`);
-      fetchQueue();
+      fetchStats();
     } catch (err: any) {
       toast.error(err.message || "Failed to allow queue users");
+      throw err;
+    }
+  };
+
+  const updateAutoConfig = async (config: { enabled: boolean; maxUsers: number }) => {
+    if (!eventId) return;
+    try {
+      const newConfig = await adminApi.updateAutoQueueConfig(eventId, config);
+      setAutoConfig(newConfig);
+      toast.success("Auto-Queue configuration updated");
+    } catch (err: any) {
+      toast.error(err.message || "Failed to update auto-queue config");
       throw err;
     }
   };
@@ -175,12 +215,12 @@ export const useAdminQueue = (eventId: string | null) => {
     try {
       await adminApi.resetQueue(eventId);
       toast.success("Queue reset successfully");
-      fetchQueue();
+      fetchStats();
     } catch (err: any) {
       toast.error(err.message || "Failed to reset queue");
       throw err;
     }
   };
 
-  return { queueStats, loading, error, refetch: fetchQueue, allowUsers, resetQueue };
+  return { queueStats, autoConfig, loading, error, refetch, allowUsers, updateAutoConfig, resetQueue };
 };

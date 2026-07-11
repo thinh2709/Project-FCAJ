@@ -65,7 +65,7 @@ async function handleMoMoPayment(ipnData) {
         `UPDATE bookings 
          SET status = 'confirmed', 
              payment_status = 'paid',
-             momo_transaction_id = $1,
+             transaction_id = $1,
              updated_at = NOW()
          WHERE id = $2`,
         [transId, orderId]

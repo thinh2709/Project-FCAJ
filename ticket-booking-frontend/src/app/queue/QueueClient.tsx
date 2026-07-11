@@ -9,6 +9,8 @@ import { useAuth } from "@/features/auth/hooks/useAuth";
 import { Container } from "@/shared/components/Container";
 import { AlertCircle, Clock, Users, ShieldCheck, Ticket } from "lucide-react";
 import { getEventTitle } from "@/lib/utils";
+import { Navbar } from "@/shared/components/Navbar";
+import { Footer } from "@/shared/components/Footer";
 
 export default function QueueClient() {
   const searchParams = useSearchParams();
@@ -121,112 +123,135 @@ export default function QueueClient() {
     }
   }, [queueData, eventId, router]);
 
+  let content;
+
   if (tabBlocked) {
-    return (
+    content = (
       <Container className="py-20 flex flex-col items-center text-center">
         <AlertCircle className="w-16 h-16 text-destructive mb-4" />
         <h2 className="text-2xl font-bold mb-2">Already in Queue</h2>
-        <p className="text-muted-foreground">You are already waiting in the queue in another tab or window. Please use that tab to continue.</p>
-        <button onClick={() => router.push('/')} className="mt-6 px-6 py-2 bg-primary text-primary-foreground rounded-md font-medium">Return to Home</button>
+        <p className="text-[#A3A3A3] mb-6">You are already waiting in the queue in another tab or window. Please use that tab to continue.</p>
+        <button 
+          onClick={() => router.push('/')} 
+          className="px-6 py-2.5 bg-white hover:bg-[#E5E5E5] text-black font-semibold rounded-xl transition-all"
+        >
+          Return to Home
+        </button>
       </Container>
     );
-  }
-
-  if (!eventId) {
-    return (
+  } else if (!eventId) {
+    content = (
       <Container className="py-20 flex flex-col items-center text-center">
         <AlertCircle className="w-16 h-16 text-destructive mb-4" />
         <h2 className="text-2xl font-bold mb-2">Invalid Access</h2>
-        <p className="text-muted-foreground">No event specified for the waiting room.</p>
+        <p className="text-[#A3A3A3]">No event specified for the waiting room.</p>
+      </Container>
+    );
+  } else {
+    const isGranted = queueData?.status === 'GRANTED';
+    const position = queueData?.position || 0;
+    
+    // Calculate estimated time dynamically
+    const estimatedWaitMinutes = position > 0 ? Math.max(1, Math.ceil(position / 15)) : 0;
+    const remainingTickets = queueData?.remainingTickets;
+
+    content = (
+      <Container className="py-12 md:py-24 max-w-3xl">
+        <div className="bg-[#151515] border border-[#2A2A2A] rounded-3xl p-8 md:p-12 shadow-2xl flex flex-col items-center text-center relative overflow-hidden">
+          {/* Background animation elements */}
+          <div className="absolute top-0 left-0 w-full h-1 bg-white/5 overflow-hidden">
+            <div className="h-full bg-white/40 animate-[pulse_2s_ease-in-out_infinite] w-1/3" />
+          </div>
+
+          {!isGranted ? (
+            <>
+              <div className="w-24 h-24 bg-white/5 rounded-full flex items-center justify-center mb-8 relative border border-white/10">
+                <div className="absolute inset-0 rounded-full border-4 border-white border-t-transparent animate-spin" />
+                <Users className="w-10 h-10 text-white" />
+              </div>
+
+              <h1 
+                className="text-3xl md:text-4xl font-bold mb-4 tracking-tight text-white"
+                style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+              >
+                You are in line.
+              </h1>
+              
+              {event && (
+                <p className="text-base md:text-lg text-[#A3A3A3] mb-8">
+                  Waiting for <strong className="text-white font-medium">{getEventTitle(event.team_a, event.team_b)}</strong>
+                </p>
+              )}
+
+              {/* Status grid */}
+              <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+                <div className="bg-white/5 rounded-2xl p-6 border border-white/10 flex flex-col items-center">
+                  <span className="text-xs text-[#6B6B6B] uppercase tracking-wider font-semibold mb-2">Remaining Tickets</span>
+                  <div className="flex items-center gap-2 mt-2">
+                    <Ticket className="w-5 h-5 text-white" />
+                    <span className="text-3xl font-bold text-white">
+                      {remainingTickets != null ? remainingTickets.toLocaleString() : "..."}
+                    </span>
+                  </div>
+                </div>
+                
+                <div className="bg-white/5 rounded-2xl p-6 border border-white/10 flex flex-col items-center">
+                  <span className="text-xs text-[#6B6B6B] uppercase tracking-wider font-semibold mb-2">Your Position</span>
+                  <span className="text-5xl font-bold text-white">
+                    {isJoining ? "..." : (position > 0 ? position.toLocaleString() : "---")}
+                  </span>
+                </div>
+                
+                <div className="bg-white/5 rounded-2xl p-6 border border-white/10 flex flex-col items-center">
+                  <span className="text-xs text-[#6B6B6B] uppercase tracking-wider font-semibold mb-2">Estimated Wait</span>
+                  <div className="flex items-center gap-2 mt-2">
+                    <Clock className="w-5 h-5 text-white" />
+                    <span className="text-3xl font-bold text-white">
+                      {isJoining || position === 0 ? "..." : `${estimatedWaitMinutes} min`}
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <p className="text-xs text-[#6B6B6B] max-w-lg leading-relaxed">
+                Please do not refresh this page or close your browser. You will automatically be redirected to the booking page when it is your turn.
+              </p>
+            </>
+          ) : (
+            <>
+              <div className="w-24 h-24 bg-green-500/10 rounded-full flex items-center justify-center mb-8 border border-green-500/20">
+                <ShieldCheck className="w-12 h-12 text-green-500" />
+              </div>
+              <h1 
+                className="text-3xl md:text-4xl font-bold mb-4 tracking-tight text-white"
+                style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+              >
+                It's your turn!
+              </h1>
+              <p className="text-lg text-[#A3A3A3]">
+                Redirecting you to the booking page...
+              </p>
+            </>
+          )}
+
+          {(joinError || pollError) && (
+            <div className="mt-8 p-4 bg-red-500/10 text-red-400 border border-red-500/20 rounded-xl w-full flex items-center justify-center gap-2 text-sm font-medium">
+              <AlertCircle className="w-4 h-4" />
+              <span>Connection lost. Reconnecting to the queue...</span>
+            </div>
+          )}
+        </div>
       </Container>
     );
   }
 
-  const isGranted = queueData?.status === 'GRANTED';
-  const position = queueData?.position || 0;
-  
-  // Calculate estimated time dynamically
-  const estimatedWaitMinutes = position > 0 ? Math.max(1, Math.ceil(position / 15)) : 0;
-  const remainingTickets = queueData?.remainingTickets;
-
   return (
-    <Container className="py-12 md:py-24 max-w-3xl">
-      <div className="bg-card border border-border rounded-2xl p-8 md:p-12 shadow-xl flex flex-col items-center text-center relative overflow-hidden">
-        {/* Background animation elements */}
-        <div className="absolute top-0 left-0 w-full h-1 bg-muted overflow-hidden">
-          <div className="h-full bg-primary animate-[pulse_2s_ease-in-out_infinite] w-1/3" />
-        </div>
-
-        {!isGranted ? (
-          <>
-            <div className="w-24 h-24 bg-primary/10 rounded-full flex items-center justify-center mb-8 relative">
-              <div className="absolute inset-0 rounded-full border-4 border-primary border-t-transparent animate-spin" />
-              <Users className="w-10 h-10 text-primary" />
-            </div>
-
-            <h1 className="text-3xl md:text-4xl font-extrabold mb-4 tracking-tight">
-              You are in line.
-            </h1>
-            
-            {event && (
-              <p className="text-lg text-muted-foreground mb-8">
-                Waiting for <strong className="text-foreground">{getEventTitle(event.team_a, event.team_b)}</strong>
-              </p>
-            )}
-
-            <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-              <div className="bg-secondary/50 rounded-xl p-6 border border-border/50 flex flex-col items-center">
-                <span className="text-sm text-muted-foreground font-medium mb-2 uppercase tracking-wider">Remaining Tickets</span>
-                <div className="flex items-center gap-2 mt-2">
-                  <Ticket className="w-6 h-6 text-primary" />
-                  <span className="text-3xl font-bold">
-                    {remainingTickets != null ? remainingTickets.toLocaleString() : "..."}
-                  </span>
-                </div>
-              </div>
-              <div className="bg-secondary/50 rounded-xl p-6 border border-border/50 flex flex-col items-center">
-                <span className="text-sm text-muted-foreground font-medium mb-2 uppercase tracking-wider">Your Position</span>
-                <span className="text-5xl font-black text-foreground">
-                  {isJoining ? "..." : (position > 0 ? position.toLocaleString() : "---")}
-                </span>
-              </div>
-              
-              <div className="bg-secondary/50 rounded-xl p-6 border border-border/50 flex flex-col items-center">
-                <span className="text-sm text-muted-foreground font-medium mb-2 uppercase tracking-wider">Estimated Wait</span>
-                <div className="flex items-center gap-2 mt-2">
-                  <Clock className="w-6 h-6 text-primary" />
-                  <span className="text-3xl font-bold">
-                    {isJoining || position === 0 ? "..." : `${estimatedWaitMinutes} min`}
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            <p className="text-sm text-muted-foreground max-w-lg">
-              Please do not refresh this page or close your browser. You will automatically be redirected to the booking page when it is your turn.
-            </p>
-          </>
-        ) : (
-          <>
-            <div className="w-24 h-24 bg-green-500/20 rounded-full flex items-center justify-center mb-8">
-              <ShieldCheck className="w-12 h-12 text-green-500" />
-            </div>
-            <h1 className="text-3xl md:text-4xl font-extrabold mb-4 tracking-tight">
-              It's your turn!
-            </h1>
-            <p className="text-lg text-muted-foreground">
-              Redirecting you to the booking page...
-            </p>
-          </>
-        )}
-
-        {(joinError || pollError) && (
-          <div className="mt-8 p-4 bg-destructive/10 text-destructive rounded-lg w-full flex items-center justify-center gap-2">
-            <AlertCircle className="w-5 h-5" />
-            <span>Connection lost. Reconnecting to the queue...</span>
-          </div>
-        )}
-      </div>
-    </Container>
+    <div className="min-h-screen flex flex-col bg-[#0A0A0A] text-white">
+      <Navbar />
+      <main className="flex-1 pt-20 flex flex-col justify-center">
+        {content}
+      </main>
+      <Footer />
+    </div>
   );
 }

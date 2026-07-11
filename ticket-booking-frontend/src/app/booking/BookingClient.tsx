@@ -345,7 +345,7 @@ export default function BookingClient() {
   useEffect(() => {
     const handleUnload = () => {
       if (successDataRef.current && !isProcessingPaymentRef.current && authTokenRef.current) {
-        const url = `${process.env.NEXT_PUBLIC_API_URL || 'https://gdqwmt0jq2.execute-api.us-east-1.amazonaws.com'}/api/bookings/${successDataRef.current.bookingId}`;
+        const url = `${process.env.NEXT_PUBLIC_API_URL}/api/bookings/${successDataRef.current.bookingId}`;
         fetch(url, {
           method: 'DELETE',
           headers: {
@@ -357,6 +357,29 @@ export default function BookingClient() {
     };
     window.addEventListener("pagehide", handleUnload);
     return () => window.removeEventListener("pagehide", handleUnload);
+  }, []);
+
+  // Bắt sự kiện người dùng dùng nút "Back" quay lại từ trang MoMo (khôi phục từ BFCache)
+  useEffect(() => {
+    const handlePageShow = (e: PageTransitionEvent) => {
+      if (e.persisted && isProcessingPaymentRef.current && successDataRef.current && authTokenRef.current) {
+        const url = `${process.env.NEXT_PUBLIC_API_URL}/api/bookings/${successDataRef.current.bookingId}`;
+        fetch(url, {
+          method: 'DELETE',
+          headers: {
+            'Authorization': `Bearer ${authTokenRef.current}`
+          },
+          keepalive: true
+        }).catch(() => {});
+        
+        // Reset state
+        setSuccessData(null);
+        setIsProcessingPayment(false);
+        setError("Giao dịch bị hủy do bạn đã rời khỏi trang thanh toán.");
+      }
+    };
+    window.addEventListener("pageshow", handlePageShow);
+    return () => window.removeEventListener("pageshow", handlePageShow);
   }, []);
 
   // Listen for component unmount (client-side routing away / back button) to cancel reservation instantly
@@ -465,7 +488,7 @@ export default function BookingClient() {
         sessionId: sessionId as string,
       });
       setSuccessData(result);
-      setTimeLeft(240); // Reset timer for payment
+      setTimeLeft(300); // Reset timer for payment (5 minutes)
     } catch (err: any) {
       setError(err.response?.data?.error?.message || err.message || "Distributed lock acquisition failed.");
     } finally {

@@ -132,5 +132,15 @@ export const adminApi = {
       fileType,
     });
     return response.data.data.imageUrl;
+  },
+
+  getAutoQueueConfig: async (eventId: string): Promise<{ enabled: boolean; maxUsers: number }> => {
+    const response = await apiClient.get<SingleResponse<{ enabled: boolean; maxUsers: number }>>(`/api/queue/admin/config?eventId=${eventId}`);
+    return response.data.data;
+  },
+
+  updateAutoQueueConfig: async (eventId: string, config: { enabled: boolean; maxUsers: number }): Promise<any> => {
+    const response = await apiClient.post(`/api/queue/admin/config`, { eventId, ...config });
+    return response.data.data;
   }
 };

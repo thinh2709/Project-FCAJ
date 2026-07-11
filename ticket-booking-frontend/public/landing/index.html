@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TK-AWS — Premium Event Tickets | Football, Concerts & Live Entertainment</title>
+  <meta name="description" content="Discover and book tickets for football matches, concerts, sports events, and live entertainment around the world. Premium booking experience with TK-AWS.">
+  <meta name="keywords" content="tickets, events, football, concerts, sports, theatre, live entertainment, booking">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%232563EB'%3E%3Cpath d='M15 5v2m0 4v2m0 4v2M5 5a2 2 0 0 0-2 2v3a2 2 0 1 1 0 4v3a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-3a2 2 0 1 1 0-4V7a2 2 0 0 0-2-2H5z'/%3E%3C/svg%3E">
+</head>
+<body>
+
+  <!-- ==================== NAVBAR ==================== -->
+  <nav class="navbar" id="navbar">
+    <div class="navbar-inner">
+      <!-- Logo -->
+      <a href="#" class="navbar-logo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/>
+          <path d="M13 5v2"/>
+          <path d="M13 17v2"/>
+          <path d="M13 11v2"/>
+        </svg>
+        TK-AWS
+      </a>
+
+      <!-- Navigation -->
+      <div class="navbar-nav">
+        <a href="#" class="active">Football</a>
+        <a href="#">Concerts</a>
+        <a href="#">Sports</a>
+        <a href="#">Theatre</a>
+      </div>
+
+      <!-- Search -->
+      <div class="navbar-search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"/>
+          <path d="m21 21-4.3-4.3"/>
+        </svg>
+        <input type="search" placeholder="Search events, venues, artists..." id="search-input">
+      </div>
+
+      <!-- Actions -->
+      <div class="navbar-actions">
+        <button class="navbar-action-btn" id="notifications-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/>
+            <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/>
+          </svg>
+          <span class="notification-dot"></span>
+        </button>
+        <a href="#" class="navbar-action-btn" id="my-tickets-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/>
+            <path d="M13 5v2"/>
+            <path d="M13 17v2"/>
+            <path d="M13 11v2"/>
+          </svg>
+          <span>My Tickets</span>
+        </a>
+        <div class="profile-avatar" id="profile-btn">TN</div>
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <button class="navbar-mobile-btn" id="mobile-menu-btn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="4" x2="20" y1="12" y2="12"/>
+          <line x1="4" x2="20" y1="6" y2="6"/>
+          <line x1="4" x2="20" y1="18" y2="18"/>
+        </svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ==================== HERO SECTION ==================== -->
+  <section class="hero" id="hero">
+    <div class="hero-bg">
+      <img src="https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=1920&q=80&auto=format" alt="Football stadium at night with dramatic lighting">
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-left">
+        <div class="badge fade-in">WORLD CUP QUALIFIERS</div>
+        <h1 class="hero-title fade-in stagger-1">
+          Experience<br>
+          <span>Live Football</span>
+        </h1>
+        <p class="hero-description fade-in stagger-2">
+          Discover and book tickets for football matches, concerts and live entertainment around the world.
+        </p>
+        <div class="hero-buttons fade-in stagger-3">
+          <a href="#trending" class="btn btn-primary">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/>
+            </svg>
+            Book Tickets
+          </a>
+          <a href="#categories" class="btn btn-secondary">
+            Explore Events
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="m9 18 6-6-6-6"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-right fade-in-right stagger-2">
+        <div class="hero-poster">
+          <img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=800&q=80&auto=format" alt="Vietnam vs Japan - World Cup Qualifiers 2026">
+        </div>
+        <div class="hero-floating-card">
+          <div class="floating-card-title">Vietnam vs Japan</div>
+          <div class="floating-card-info">
+            <div class="floating-card-row">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M8 2v4"/>
+                <path d="M16 2v4"/>
+                <rect width="18" height="18" x="3" y="4" rx="2"/>
+                <path d="M3 10h18"/>
+              </svg>
+              10 Jul 2026
+            </div>
+            <div class="floating-card-row">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>
+                <circle cx="12" cy="10" r="3"/>
+              </svg>
+              Mỹ Đình Stadium
+            </div>
+          </div>
+          <div class="floating-card-price">
+            <span class="price-label">From</span>
+            <span class="price-value">1,000,000₫</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CATEGORIES ==================== -->
+  <section class="categories section" id="categories">
+    <div class="container">
+      <div class="categories-scroll fade-in">
+        <button class="category-pill active">
+          <span class="emoji">⚽</span> Football
+        </button>
+        <button class="category-pill">
+          <span class="emoji">🎵</span> Concerts
+        </button>
+        <button class="category-pill">
+          <span class="emoji">🏀</span> Sports
+        </button>
+        <button class="category-pill">
+          <span class="emoji">🎭</span> Theatre
+        </button>
+        <button class="category-pill">
+          <span class="emoji">😂</span> Comedy
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== TRENDING EVENTS ==================== -->
+  <section class="section" id="trending">
+    <div class="container">
+      <div class="section-header fade-in">
+        <div class="section-header-left">
+          <span class="section-subtitle">Trending Now</span>
+          <h2 class="heading-lg">Trending Events</h2>
+        </div>
+        <a href="#" class="section-link">
+          View All
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m9 18 6-6-6-6"/>
+          </svg>
+        </a>
+      </div>
+
+      <div class="events-grid">
+        <!-- Event Card 1 -->
+        <div class="event-card fade-in stagger-1">
+          <div class="event-card-image">
+            <img src="https://images.unsplash.com/photo-1489944440615-453fc2b6a9a9?w=600&q=80&auto=format" alt="Vietnam vs Japan">
+            <span class="event-card-category">Football</span>
+          </div>
+          <div class="event-card-body">
+            <h3 class="event-card-title">Vietnam vs Japan</h3>
+            <div class="event-card-meta">
+              <div class="event-card-meta-row">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M8 2v4"/><path d="M16 2v4"/>
+                  <rect width="18" height="18" x="3" y="4" rx="2"/>
+                  <path d="M3 10h18"/>
+                </svg>
+                10 Jul 2026 · 19:00
+              </div>
+              <div class="event-card-meta-row">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>
+                  <circle cx="12" cy="10" r="3"/>
+                </svg>
+                Mỹ Đình Stadium, Hanoi
+              </div>
+            </div>
+            <div class="event-card-footer">
+              <div class="event-card-price">
+                Starting from
+                <strong>1,000,000₫</strong>
+              </div>
+              <button class="event-card-btn">Book Now</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Event Card 2 -->
+        <div class="event-card fade-in stagger-2">
+          <div class="event-card-image">
+            <img src="https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=600&q=80&auto=format" alt="EDM Festival 2026">
+            <span class="event-card-category">Concert</span>
+          </div>
+          <div class="event-card-body">
+            <h3 class="event-card-title">Saigon Sound Festival 2026</h3>
+            <div class="event-card-meta">
+              <div class="event-card-meta-row">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M8 2v4"/><path d="M16 2v4"/>
+                  <rect width="18" height="18" x="3" y="4" rx="2"/>
+                  <path d="M3 10h18"/>
+                </svg>
+                22 Aug 2026 · 18:00
+              </div>
+              <div class="event-card-meta-row">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>
+                  <circle cx="12" cy="10" r="3"/>
+                </svg>
+                Phú Thọ Indoor, HCMC
+              </div>
+            </div>
+            <div class="event-card-footer">
+              <div class="event-card-price">
+                Starting from
+                <strong>800,000₫</strong>
+              </div>
+              <button class="event-card-btn">Book Now</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Event Card 3 -->
+        <div class="event-card fade-in stagger-3">
+          <div class="event-card-image">
+            <img src="https://images.unsplash.com/photo-1546519638-68e109498ffc?w=600&q=80&auto=format" alt="VBA Finals 2026">
+            <span class="event-card-category">Sports</span>
+          </div>
+          <div class="event-card-body">
+            <h3 class="event-card-title">VBA Finals 2026 — Game 5</h3>
+            <div class="event-card-meta">
+              <div class="event-card-meta-row">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M8 2v4"/><path d="M16 2v4"/>
+                  <rect width="18" height="18" x="3" y="4" rx="2"/>
+                  <path d="M3 10h18"/>
+                </svg>
+                15 Sep 2026 · 20:00
+              </div>
+              <div class="event-card-meta-row">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>
+                  <circle cx="12" cy="10" r="3"/>
+                </svg>
+                Nguyen Du Arena, HCMC
+              </div>
+            </div>
+            <div class="event-card-footer">
+              <div class="event-card-price">
+                Starting from
+                <strong>500,000₫</strong>
+              </div>
+              <button class="event-card-btn">Book Now</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Event Card 4 -->
+        <div class="event-card fade-in stagger-4">
+          <div class="event-card-image">
+            <img src="https://images.unsplash.com/photo-1507676184212-d03ab07a01bf?w=600&q=80&auto=format" alt="Swan Lake Ballet">
+            <span class="event-card-category">Theatre</span>
+          </div>
+          <div class="event-card-body">
+            <h3 class="event-card-title">Swan Lake — Hanoi Opera House</h3>
+            <div class="event-card-meta">
+              <div class="event-card-meta-row">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M8 2v4"/><path d="M16 2v4"/>
+                  <rect width="18" height="18" x="3" y="4" rx="2"/>
+                  <path d="M3 10h18"/>
+                </svg>
+                05 Oct 2026 · 19:30
+              </div>
+              <div class="event-card-meta-row">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>
+                  <circle cx="12" cy="10" r="3"/>
+                </svg>
+                Hanoi Opera House
+              </div>
+            </div>
+            <div class="event-card-footer">
+              <div class="event-card-price">
+                Starting from
+                <strong>1,500,000₫</strong>
+              </div>
+              <button class="event-card-btn">Book Now</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Event Card 5 -->
+        <div class="event-card fade-in stagger-1">
+          <div class="event-card-image">
+            <img src="https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?w=600&q=80&auto=format" alt="K-Pop Concert">
+            <span class="event-card-category">Concert</span>
+          </div>
+          <div class="event-card-body">
+            <h3 class="event-card-title">K-Pop Super Live in Vietnam</h3>
+            <div class="event-card-meta">
+              <div class="event-card-meta-row">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M8 2v4"/><path d="M16 2v4"/>
+                  <rect width="18" height="18" x="3" y="4" rx="2"/>
+                  <path d="M3 10h18"/>
+                </svg>
+                28 Nov 2026 · 18:30
+              </div>
+              <div class="event-card-meta-row">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>
+                  <circle cx="12" cy="10" r="3"/>
+                </svg>
+                Mỹ Đình Stadium, Hanoi
+              </div>
+            </div>
+            <div class="event-card-footer">
+              <div class="event-card-price">
+                Starting from
+                <strong>2,500,000₫</strong>
+              </div>
+              <button class="event-card-btn">Book Now</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Event Card 6 -->
+        <div class="event-card fade-in stagger-2">
+          <div class="event-card-image">
+            <img src="https://images.unsplash.com/photo-1585699324551-f6c309eedeca?w=600&q=80&auto=format" alt="Stand-Up Comedy Night">
+            <span class="event-card-category">Comedy</span>
+          </div>
+          <div class="event-card-body">
+            <h3 class="event-card-title">Saigon Stand-Up Comedy Night</h3>
+            <div class="event-card-meta">
+              <div class="event-card-meta-row">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M8 2v4"/><path d="M16 2v4"/>
+                  <rect width="18" height="18" x="3" y="4" rx="2"/>
+                  <path d="M3 10h18"/>
+                </svg>
+                12 Aug 2026 · 20:00
+              </div>
+              <div class="event-card-meta-row">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>
+                  <circle cx="12" cy="10" r="3"/>
+                </svg>
+                Soul Live Project, HCMC
+              </div>
+            </div>
+            <div class="event-card-footer">
+              <div class="event-card-price">
+                Starting from
+                <strong>300,000₫</strong>
+              </div>
+              <button class="event-card-btn">Book Now</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Event Card 7 -->
+        <div class="event-card fade-in stagger-3">
+          <div class="event-card-image">
+            <img src="https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=600&q=80&auto=format" alt="Vietnam vs Thailand">
+            <span class="event-card-category">Football</span>
+          </div>
+          <div class="event-card-body">
+            <h3 class="event-card-title">Vietnam vs Thailand — AFF Cup</h3>
+            <div class="event-card-meta">
+              <div class="event-card-meta-row">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M8 2v4"/><path d="M16 2v4"/>
+                  <rect width="18" height="18" x="3" y="4" rx="2"/>
+                  <path d="M3 10h18"/>
+                </svg>
+                20 Dec 2026 · 19:00
+              </div>
+              <div class="event-card-meta-row">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>
+                  <circle cx="12" cy="10" r="3"/>
+                </svg>
+                Mỹ Đình Stadium, Hanoi
+              </div>
+            </div>
+            <div class="event-card-footer">
+              <div class="event-card-price">
+                Starting from
+                <strong>600,000₫</strong>
+              </div>
+              <button class="event-card-btn">Book Now</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Event Card 8 -->
+        <div class="event-card fade-in stagger-4">
+          <div class="event-card-image">
+            <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=600&q=80&auto=format" alt="Mỹ Tâm Live Concert">
+            <span class="event-card-category">Concert</span>
+          </div>
+          <div class="event-card-body">
+            <h3 class="event-card-title">Mỹ Tâm — Tri Âm Live Concert</h3>
+            <div class="event-card-meta">
+              <div class="event-card-meta-row">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M8 2v4"/><path d="M16 2v4"/>
+                  <rect width="18" height="18" x="3" y="4" rx="2"/>
+                  <path d="M3 10h18"/>
+                </svg>
+                14 Nov 2026 · 19:00
+              </div>
+              <div class="event-card-meta-row">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>
+                  <circle cx="12" cy="10" r="3"/>
+                </svg>
+                Phú Thọ Indoor, HCMC
+              </div>
+            </div>
+            <div class="event-card-footer">
+              <div class="event-card-price">
+                Starting from
+                <strong>1,200,000₫</strong>
+              </div>
+              <button class="event-card-btn">Book Now</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FEATURED MATCH ==================== -->
+  <section class="section" id="featured">
+    <div class="container">
+      <div class="featured-match fade-in">
+        <div class="featured-match-bg">
+          <img src="https://images.unsplash.com/photo-1522778119026-d647f0596c20?w=1400&q=80&auto=format" alt="Stadium background">
+        </div>
+        <div class="featured-match-overlay"></div>
+        <div class="featured-match-content">
+          <div class="featured-match-info">
+            <div class="badge">WORLD CUP QUALIFIERS · FEATURED</div>
+            <h2 class="featured-match-teams">
+              Vietnam <span>vs</span> Japan
+            </h2>
+            <div class="featured-match-meta">
+              <div class="featured-match-meta-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M8 2v4"/><path d="M16 2v4"/>
+                  <rect width="18" height="18" x="3" y="4" rx="2"/>
+                  <path d="M3 10h18"/>
+                </svg>
+                10 Jul 2026
+              </div>
+              <div class="featured-match-meta-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"/>
+                  <polyline points="12 6 12 12 16 14"/>
+                </svg>
+                19:00
+              </div>
+              <div class="featured-match-meta-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>
+                  <circle cx="12" cy="10" r="3"/>
+                </svg>
+                Mỹ Đình Stadium
+              </div>
+            </div>
+            <a href="#" class="btn btn-primary">
+              Buy Ticket
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m9 18 6-6-6-6"/>
+              </svg>
+            </a>
+          </div>
+
+          <div class="countdown" id="countdown">
+            <div class="countdown-item">
+              <span class="countdown-value" id="countdown-days">00</span>
+              <span class="countdown-label">Days</span>
+            </div>
+            <span class="countdown-separator">:</span>
+            <div class="countdown-item">
+              <span class="countdown-value" id="countdown-hours">00</span>
+              <span class="countdown-label">Hours</span>
+            </div>
+            <span class="countdown-separator">:</span>
+            <div class="countdown-item">
+              <span class="countdown-value" id="countdown-mins">00</span>
+              <span class="countdown-label">Mins</span>
+            </div>
+            <span class="countdown-separator">:</span>
+            <div class="countdown-item">
+              <span class="countdown-value" id="countdown-secs">00</span>
+              <span class="countdown-label">Secs</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== UPCOMING EVENTS ==================== -->
+  <section class="section" id="upcoming">
+    <div class="container">
+      <div class="section-header fade-in">
+        <div class="section-header-left">
+          <span class="section-subtitle">Don't Miss Out</span>
+          <h2 class="heading-lg">Upcoming Events</h2>
+        </div>
+        <a href="#" class="section-link">
+          View Calendar
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m9 18 6-6-6-6"/>
+          </svg>
+        </a>
+      </div>
+
+      <div class="upcoming-events-list">
+        <!-- Upcoming 1 -->
+        <div class="upcoming-event-row fade-in stagger-1">
+          <div class="upcoming-event-date">
+            <span class="month">Jul</span>
+            <span class="day">10</span>
+          </div>
+          <div class="upcoming-event-info">
+            <h3 class="upcoming-event-title">Vietnam vs Japan — WCQ 2026</h3>
+            <div class="upcoming-event-venue">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>
+                <circle cx="12" cy="10" r="3"/>
+              </svg>
+              Mỹ Đình Stadium, Hanoi · 19:00
+            </div>
+          </div>
+          <div class="upcoming-event-actions">
+            <span class="upcoming-event-price">1,000,000₫</span>
+            <button class="btn btn-primary btn-sm">Book</button>
+          </div>
+        </div>
+
+        <!-- Upcoming 2 -->
+        <div class="upcoming-event-row fade-in stagger-2">
+          <div class="upcoming-event-date">
+            <span class="month">Aug</span>
+            <span class="day">12</span>
+          </div>
+          <div class="upcoming-event-info">
+            <h3 class="upcoming-event-title">Saigon Stand-Up Comedy Night</h3>
+            <div class="upcoming-event-venue">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>
+                <circle cx="12" cy="10" r="3"/>
+              </svg>
+              Soul Live Project, HCMC · 20:00
+            </div>
+          </div>
+          <div class="upcoming-event-actions">
+            <span class="upcoming-event-price">300,000₫</span>
+            <button class="btn btn-primary btn-sm">Book</button>
+          </div>
+        </div>
+
+        <!-- Upcoming 3 -->
+        <div class="upcoming-event-row fade-in stagger-3">
+          <div class="upcoming-event-date">
+            <span class="month">Aug</span>
+            <span class="day">22</span>
+          </div>
+          <div class="upcoming-event-info">
+            <h3 class="upcoming-event-title">Saigon Sound Festival 2026</h3>
+            <div class="upcoming-event-venue">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>
+                <circle cx="12" cy="10" r="3"/>
+              </svg>
+              Phú Thọ Indoor, HCMC · 18:00
+            </div>
+          </div>
+          <div class="upcoming-event-actions">
+            <span class="upcoming-event-price">800,000₫</span>
+            <button class="btn btn-primary btn-sm">Book</button>
+          </div>
+        </div>
+
+        <!-- Upcoming 4 -->
+        <div class="upcoming-event-row fade-in stagger-4">
+          <div class="upcoming-event-date">
+            <span class="month">Sep</span>
+            <span class="day">15</span>
+          </div>
+          <div class="upcoming-event-info">
+            <h3 class="upcoming-event-title">VBA Finals 2026 — Game 5</h3>
+            <div class="upcoming-event-venue">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>
+                <circle cx="12" cy="10" r="3"/>
+              </svg>
+              Nguyen Du Arena, HCMC · 20:00
+            </div>
+          </div>
+          <div class="upcoming-event-actions">
+            <span class="upcoming-event-price">500,000₫</span>
+            <button class="btn btn-primary btn-sm">Book</button>
+          </div>
+        </div>
+
+        <!-- Upcoming 5 -->
+        <div class="upcoming-event-row fade-in stagger-5">
+          <div class="upcoming-event-date">
+            <span class="month">Oct</span>
+            <span class="day">05</span>
+          </div>
+          <div class="upcoming-event-info">
+            <h3 class="upcoming-event-title">Swan Lake — Ballet Performance</h3>
+            <div class="upcoming-event-venue">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>
+                <circle cx="12" cy="10" r="3"/>
+              </svg>
+              Hanoi Opera House · 19:30
+            </div>
+          </div>
+          <div class="upcoming-event-actions">
+            <span class="upcoming-event-price">1,500,000₫</span>
+            <button class="btn btn-primary btn-sm">Book</button>
+          </div>
+        </div>
+
+        <!-- Upcoming 6 -->
+        <div class="upcoming-event-row fade-in">
+          <div class="upcoming-event-date">
+            <span class="month">Nov</span>
+            <span class="day">14</span>
+          </div>
+          <div class="upcoming-event-info">
+            <h3 class="upcoming-event-title">Mỹ Tâm — Tri Âm Live Concert</h3>
+            <div class="upcoming-event-venue">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>
+                <circle cx="12" cy="10" r="3"/>
+              </svg>
+              Phú Thọ Indoor, HCMC · 19:00
+            </div>
+          </div>
+          <div class="upcoming-event-actions">
+            <span class="upcoming-event-price">1,200,000₫</span>
+            <button class="btn btn-primary btn-sm">Book</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pagination -->
+      <div class="pagination fade-in">
+        <button class="pagination-btn nav-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m15 18-6-6 6-6"/>
+          </svg>
+          Prev
+        </button>
+        <button class="pagination-btn active">1</button>
+        <button class="pagination-btn">2</button>
+        <button class="pagination-btn">3</button>
+        <button class="pagination-btn">4</button>
+        <button class="pagination-btn nav-btn">
+          Next
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m9 18 6-6-6-6"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== POPULAR VENUES ==================== -->
+  <section class="section" id="venues">
+    <div class="container">
+      <div class="section-header fade-in">
+        <div class="section-header-left">
+          <span class="section-subtitle">Top Destinations</span>
+          <h2 class="heading-lg">Popular Venues</h2>
+        </div>
+        <a href="#" class="section-link">
+          All Venues
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m9 18 6-6-6-6"/>
+          </svg>
+        </a>
+      </div>
+
+      <div class="venues-grid">
+        <!-- Venue 1 -->
+        <div class="venue-card fade-in stagger-1">
+          <img src="https://images.unsplash.com/photo-1577223625816-7546f13df25d?w=600&q=80&auto=format" alt="Mỹ Đình National Stadium">
+          <div class="venue-card-overlay"></div>
+          <div class="venue-card-content">
+            <h3 class="venue-card-name">Mỹ Đình National Stadium</h3>
+            <p class="venue-card-city">Hanoi, Vietnam</p>
+            <span class="venue-card-events">12 upcoming events</span>
+          </div>
+        </div>
+
+        <!-- Venue 2 -->
+        <div class="venue-card fade-in stagger-2">
+          <img src="https://images.unsplash.com/photo-1507676184212-d03ab07a01bf?w=600&q=80&auto=format" alt="Hanoi Opera House">
+          <div class="venue-card-overlay"></div>
+          <div class="venue-card-content">
+            <h3 class="venue-card-name">Hanoi Opera House</h3>
+            <p class="venue-card-city">Hanoi, Vietnam</p>
+            <span class="venue-card-events">8 upcoming events</span>
+          </div>
+        </div>
+
+        <!-- Venue 3 -->
+        <div class="venue-card fade-in stagger-3">
+          <img src="https://images.unsplash.com/photo-1459865264687-595d652de67e?w=600&q=80&auto=format" alt="Phú Thọ Indoor Stadium">
+          <div class="venue-card-overlay"></div>
+          <div class="venue-card-content">
+            <h3 class="venue-card-name">Phú Thọ Indoor Stadium</h3>
+            <p class="venue-card-city">Ho Chi Minh City, Vietnam</p>
+            <span class="venue-card-events">15 upcoming events</span>
+          </div>
+        </div>
+
+        <!-- Venue 4 -->
+        <div class="venue-card fade-in stagger-4">
+          <img src="https://images.unsplash.com/photo-1521731978332-9e9e714bdd20?w=600&q=80&auto=format" alt="Thống Nhất Stadium">
+          <div class="venue-card-overlay"></div>
+          <div class="venue-card-content">
+            <h3 class="venue-card-name">Thống Nhất Stadium</h3>
+            <p class="venue-card-city">Ho Chi Minh City, Vietnam</p>
+            <span class="venue-card-events">6 upcoming events</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== NEWSLETTER ==================== -->
+  <section class="newsletter" id="newsletter">
+    <div class="container">
+      <div class="newsletter-inner fade-in">
+        <h2 class="newsletter-title">Stay in the Loop</h2>
+        <p class="newsletter-description">
+          Get notified about the latest events, exclusive presales, and special offers. No spam, only the good stuff.
+        </p>
+        <form class="newsletter-form" onsubmit="event.preventDefault()">
+          <input type="email" class="newsletter-input" placeholder="Enter your email address" required>
+          <button type="submit" class="btn btn-primary">Subscribe</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <!-- Brand -->
+        <div class="footer-brand">
+          <div class="footer-brand-logo">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/>
+              <path d="M13 5v2"/>
+              <path d="M13 17v2"/>
+              <path d="M13 11v2"/>
+            </svg>
+            TK-AWS
+          </div>
+          <p>Your premium destination for live events. Discover, book, and experience the world's best football matches, concerts, and entertainment.</p>
+          <div class="footer-socials">
+            <a href="#" class="footer-social-btn" aria-label="Facebook">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </a>
+            <a href="#" class="footer-social-btn" aria-label="Twitter / X">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </a>
+            <a href="#" class="footer-social-btn" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+            </a>
+            <a href="#" class="footer-social-btn" aria-label="YouTube">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Company -->
+        <div class="footer-column">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Press</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Partners</a></li>
+          </ul>
+        </div>
+
+        <!-- Events -->
+        <div class="footer-column">
+          <h4>Events</h4>
+          <ul>
+            <li><a href="#">Football</a></li>
+            <li><a href="#">Concerts</a></li>
+            <li><a href="#">Sports</a></li>
+            <li><a href="#">Theatre</a></li>
+            <li><a href="#">Comedy</a></li>
+          </ul>
+        </div>
+
+        <!-- Support -->
+        <div class="footer-column">
+          <h4>Support</h4>
+          <ul>
+            <li><a href="#">Help Center</a></li>
+            <li><a href="#">Contact Us</a></li>
+            <li><a href="#">Refund Policy</a></li>
+            <li><a href="#">FAQs</a></li>
+            <li><a href="#">Community</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 TK-AWS. All rights reserved.</p>
+        <div class="footer-bottom-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+          <a href="#">Cookie Policy</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
